@@ -1,0 +1,10 @@
+./philo 5 800 200 200 7
+
+5 = number_of_philosophers and forks
+800 = time_to_die / time a philosophers can survive without eating
+200 = time_to_eat / time spent eating
+200 = time_to_sleep / time spent sleeping
+7 = numbers_of_meal / before ends
+
+un philosophers = un thread
+une fourchette = un mutex
