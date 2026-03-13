@@ -11,3 +11,8 @@ une fourchette = un mutex
 
 thread = petite partie d'un programme qui s'execute en parallele
 mutex = evite que deux thread utilisent la meme donnee en meme temps
+
+pthread_t thread1 = chaque philosophe 
+int id1 = numero unique de chaque philosophe 
+pthread_create = cree le thread1 etc 
+pthread_join = attend que le thread 1 se termine etc 

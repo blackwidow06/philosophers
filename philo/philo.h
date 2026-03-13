@@ -6,13 +6,15 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/02 15:15:40 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:16:33 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO
 # define PHILO 
 
+# include <stdio.h>
+# include <pthread.h>
 # include <unistd.h> 
 
 
