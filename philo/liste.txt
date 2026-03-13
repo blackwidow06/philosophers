@@ -8,3 +8,6 @@
 
 un philosophers = un thread
 une fourchette = un mutex
+
+thread = petite partie d'un programme qui s'execute en parallele
+mutex = evite que deux thread utilisent la meme donnee en meme temps
