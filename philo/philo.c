@@ -30,7 +30,7 @@ int main()
 	pthread_create(&thread2, NULL, philosopher, &id2);
 	pthread_create(&thread3, NULL, philosopher, &id3);
 
-	pthread_join(thread1, NULL);
+	pthread_join(thread1, NULL); /*attend que ca se termine*/
 	pthread_join(thread2, NULL);
 	pthread_join(thread3, NULL);
 
