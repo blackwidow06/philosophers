@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/16 15:17:37 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/16 20:43:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ typedef struct s_data
 }				t_data;
 
 /*parsing.c*/
+int	parse_args(t_data *data, int argc, char **argv);
 
-/*philo.c*/
+/*utils_parsing.c*/
+int	ft_atoi(const char *str);
+int	verif_number(char *str);
 
 #endif

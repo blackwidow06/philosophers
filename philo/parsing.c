@@ -3,52 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/16 16:22:49 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/16 20:41:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_atoi(const char *str)
+static int	check_args(int argc, char **argv)
 {
 	int	i;
-	int	sign;
-	int	nbr;
 
-	i = 0;
-	nbr = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	i = 1;
+	while (i < argc)
 	{
-		if (str[i] == '-')
-			sign *= -1;
+		if (!verif_number(argv[i]))
+			return (1);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nbr *= 10;
-		nbr += str[i] - '0';
-		i++;
-	}
-	nbr *= sign;
-	return (nbr);
+	return (0);
+}
+
+static int	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	return (1);
 }
 
 int	parse_args(t_data *data, int argc, char **argv)
 {
+	if (argc != 5 && argc != 6)
+		return (ft_error());
+	if (check_args(argc, argv))
+		return (ft_error());
+	
 	data->number_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-
+	
 	if (argc == 6)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
+
+	if (data->number_of_philo <= 0
+		|| data->time_to_die <= 0
+		|| data->time_to_eat <= 0
+		|| data->time_to_sleep <= 0)
+		return (ft_error());
 	return (0);
 }
