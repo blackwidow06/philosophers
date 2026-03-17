@@ -57,15 +57,15 @@ int	verif_number(char *str)
 
 int	check_int(char *str)
 {
-	long	n;
+	long	nbr;
 	int		i;
 
 	i = 0;
-	n = 0;
+	nbr = 0;
 	while (str[i])
 	{
-		n = n * 10 + (str[i] - '0');
-		if (n > INT_MAX)
+		nbr = nbr * 10 + (str[i] - '0');
+		if (nbr > INT_MAX)
 			return (0);
 		i++;
 	}

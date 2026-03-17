@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/17 13:26:33 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:19:40 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,24 @@ int	parse_args(t_data *data, int argc, char **argv)
 		return (ft_error());
 	return (0);
 }
+//int main(int argc, char **argv)
+//{
+//	t_data data;
+
+//	if (parse_args(&data, argc, argv))
+//	{
+//		write(2, "Parsing failed\n", 15);
+//		return 1;
+//	}
+
+//	printf("Number of philosophers: %d\n", data.number_of_philo);
+//	printf("Time to die: %d\n", data.time_to_die);
+//	printf("Time to eat: %d\n", data.time_to_eat);
+//	printf("Time to sleep: %d\n", data.time_to_sleep);
+//	if (data.number_of_meals != -1)
+//		printf("Number of meals: %d\n", data.number_of_meals);
+//	else
+//		printf("Number of meals: unlimited\n");
+
+//	return 0;
+//}

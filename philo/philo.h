@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/17 14:03:26 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:14:05 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_philo
 	pthread_mutex_t *right_fork;
 	
 	t_data *data;
-}				t_philo
+}				t_philo;
 
 /*parsing.c*/
 int	parse_args(t_data *data, int argc, char **argv);
