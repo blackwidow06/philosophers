@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/17 13:21:17 by malavaud          #+#    #+#             */
+/*   Updated: 2026/03/17 13:21:17 by malavaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -38,6 +49,23 @@ int	verif_number(char *str)
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_int(char *str)
+{
+	long	n;
+	int		i;
+
+	i = 0;
+	n = 0;
+	while (str[i])
+	{
+		n = n * 10 + (str[i] - '0');
+		if (n > INT_MAX)
 			return (0);
 		i++;
 	}

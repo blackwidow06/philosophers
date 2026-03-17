@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/16 20:41:51 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/17 13:26:33 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_args(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (!verif_number(argv[i]))
+		if (!verif_number(argv[i]) || !check_int(argv[i]))
 			return (1);
 		i++;
 	}
@@ -52,7 +52,8 @@ int	parse_args(t_data *data, int argc, char **argv)
 	if (data->number_of_philo <= 0
 		|| data->time_to_die <= 0
 		|| data->time_to_eat <= 0
-		|| data->time_to_sleep <= 0)
+		|| data->time_to_sleep <= 0
+		|| (argc == 6 && data->number_of_meals <= 0))
 		return (ft_error());
 	return (0);
 }

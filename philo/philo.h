@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/16 20:43:59 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/17 14:03:26 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <pthread.h>
+# include <limits.h>
 # include <unistd.h>
 
 typedef struct s_data
@@ -24,7 +25,24 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	number_of_meals;
+
+	pthread_mutex_t *forks;
+	pthread_mutex_t print;
 }				t_data;
+
+typedef struct s_philo
+{
+	int id;
+	long last_meal;
+	int nbr_meals;
+	
+	pthread_t thread;
+	
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
+	
+	t_data *data;
+}				t_philo
 
 /*parsing.c*/
 int	parse_args(t_data *data, int argc, char **argv);
@@ -32,5 +50,6 @@ int	parse_args(t_data *data, int argc, char **argv);
 /*utils_parsing.c*/
 int	ft_atoi(const char *str);
 int	verif_number(char *str);
+int	check_int(char *str);
 
 #endif
