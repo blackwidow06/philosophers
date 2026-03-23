@@ -6,45 +6,49 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 13:21:28 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/17 13:21:32 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 11:33:15 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//void *philosopher(void *arg)
-//{
-//	int id = *(int *)arg; /*recupere le numero depuis arg*/
+int	create_threads(t_philo *philo, t_data *data)
+{
+	int	i;
 
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	while (1)
+	{
+		printf("Philo %d is alive\n", philo->id);
+		usleep(1000000);
+	}
+	return (NULL);
+}
+
+//void	*routine(void *arg)
+//{
+//	t_philo	*philo;
+
+//	philo = (t_philo *)arg;
 //	while (1)
 //	{
-//		printf("Philosopher %d is thinking\n", id);
-//		sleep(1); /*simule la duree*/
-//		printf("Philosopher %d is eating\n", id);
-//		sleep(1);
-//		printf("Philosopher %d is sleeping\n", id);
-//		sleep(1);
+//		eat(philo);
+//		ft_sleep(philo);
+//		think(philo);
 //	}
 //	return (NULL);
-//}
-
-//int main()
-//{
-//	pthread_t thread1;
-//	pthread_t thread2;
-//	pthread_t thread3;
-
-//	int id1 = 1; /*numero unique du philosophers*/
-//	int id2 = 2;
-//	int id3 = 3;
-
-//	pthread_create(&thread1, NULL, philosopher, &id1);
-//	pthread_create(&thread2, NULL, philosopher, &id2);
-//	pthread_create(&thread3, NULL, philosopher, &id3);
-
-//	pthread_join(thread1, NULL); /*attend que ca se termine*/
-//	pthread_join(thread2, NULL);
-//	pthread_join(thread3, NULL);
-
-//	return (0);
 //}

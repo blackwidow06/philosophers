@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/02 15:11:05 by malavaud          #+#    #+#              #
-#    Updated: 2026/03/16 20:45:19 by marvin           ###   ########.fr        #
+#    Updated: 2026/03/23 11:39:12 by malavaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJ_DIR = obj
 
 SRCS = philo.c \
 	parsing.c \
-	utils_parsing.c
+	utils_parsing.c \
+	init.c \
+	main.c
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

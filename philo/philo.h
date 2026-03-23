@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/17 15:14:05 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 11:35:47 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <limits.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_data
@@ -51,5 +52,13 @@ int	parse_args(t_data *data, int argc, char **argv);
 int	ft_atoi(const char *str);
 int	verif_number(char *str);
 int	check_int(char *str);
+
+/*init.c*/
+int	init_forks(t_data *data);
+void	init_philos(t_philo *philo, t_data *data);
+
+/*philo.c*/
+int	create_threads(t_philo *philo, t_data *data);
+void	*routine(void *arg);
 
 #endif
