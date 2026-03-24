@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/23 11:35:47 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:48:02 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ void	init_philos(t_philo *philo, t_data *data);
 /*philo.c*/
 int	create_threads(t_philo *philo, t_data *data);
 void	*routine(void *arg);
+
+/*routine.c*/
+void	ft_eat(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+void	ft_think(t_philo *philo);
+void	print_msg(t_philo *philo, char *msg);
 
 #endif
