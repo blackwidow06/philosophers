@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 13:21:28 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/24 10:23:26 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 10:36:11 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ int	create_threads(t_philo *philo, t_data *data)
 	return (0);
 }
 
-//void	*routine(void *arg)
-//{
-//	t_philo	*philo;
-
-//	philo = (t_philo *)arg;
-//	while (1)
-//	{
-//		printf("Philo %d is alive\n", philo->id);
-//		usleep(1000000);
-//	}
-//	return (NULL);
-//}
-
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -51,4 +38,11 @@ void	*routine(void *arg)
 		ft_think(philo);
 	}
 	return (NULL);
+}
+
+void	print_msg(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&philo->data->print);
+	printf("Philo %d %s\n", philo->id, msg);
+	pthread_mutex_unlock(&philo->data->print);
 }
