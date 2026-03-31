@@ -1,48 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 13:21:28 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 16:44:05 by malavaud         ###   ########.fr       */
+/*   Created: 2026/03/31 13:37:16 by malavaud          #+#    #+#             */
+/*   Updated: 2026/03/31 16:38:22 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_threads(t_philo *philo, t_data *data)
+long	get_time(void)
 {
-	int	i;
+	struct timeval	time;
 
-	i = 0;
-	while (i < data->number_of_philo)
-	{
-		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]) != 0)
-			return (1);
-		i++;
-	}
-	return (0);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec * 1000);
 }
 
-void	*routine(void *arg)
+void	*monitor(void *arg)
 {
+	int		i;
 	t_philo	*philo;
-
+	
 	philo = (t_philo *)arg;
-	while (!philo->data->stop)
+	while (1)
 	{
-		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo);
+		i = 0;
+		while (i < philo[0].data->number_of_philo)
+		{
+			if (get_time() - philo[i].last_meal > philo[i].data->time_to_die)
+			{
+				print_msg(&philo[i], "died");
+				return (NULL);
+			}
+			i++;
+		}
 	}
 	return (NULL);
-}
-
-void	print_msg(t_philo *philo, char *msg)
-{
-	pthread_mutex_lock(&philo->data->print);
-	printf("Philo %d %s\n", philo->id, msg);
-	pthread_mutex_unlock(&philo->data->print);
 }

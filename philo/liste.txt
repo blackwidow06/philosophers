@@ -19,3 +19,9 @@ pthread_join = attend que le thread 1 se termine etc
 pthread_mutex_init = creer et initialie le verrou \ je cree la clef
 pthread_mutex_lock = verrou \ je prends ls clef
 pthread_mutex_unlock = libere le verrou (sinon deadlock) \ je libere la clef 
+
+tv.tv_sec = secondes (1000)
+tv.tv_usec = microsecondes (500 000)
+
+monitor = temps actuel - dernier repas (si trop grand mort)
+temps actuel - last_meal > time_to_die

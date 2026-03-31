@@ -6,7 +6,7 @@
 #    By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/02 15:11:05 by malavaud          #+#    #+#              #
-#    Updated: 2026/03/24 10:20:37 by malavaud         ###   ########.fr        #
+#    Updated: 2026/03/31 13:52:50 by malavaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = philo.c \
 	utils_parsing.c \
 	init.c \
 	main.c \
-	routine.c
+	routine.c \
+	monitoring.c
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/25 10:35:45 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:14:18 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 typedef struct s_data
 {
@@ -26,6 +27,7 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	number_of_meals;
+	int	stop;
 
 	pthread_mutex_t *forks;
 	pthread_mutex_t print;
@@ -66,5 +68,9 @@ void	print_msg(t_philo *philo, char *msg);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
+
+/*monitoring*/
+long	get_time(void);
+void	*monitor(void *arg);
 
 #endif
