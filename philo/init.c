@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 11:09:56 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 14:55:54 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 17:06:07 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	init_philos(t_philo *philo, t_data *data)
 	{
 		philo[i].id = i + 1;/*numero philo*/
 		philo[i].nbr_meals = 0;
-		philo[i].last_meal = get_time();
+		philo[i].last_meal = data->start_time;
 		philo[i].data = data;
 		philo[i].left_fork = &data->forks[i];
 		philo[i].right_fork = &data->forks[(i + 1) % data->number_of_philo];
+		pthread_mutex_init(&philo[i].meal_mutex, NULL);
 		i++;
 	}
 }

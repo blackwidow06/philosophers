@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 17:14:18 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 16:52:54 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	number_of_meals;
 	int	stop;
+	long	start_time;
 
 	pthread_mutex_t *forks;
 	pthread_mutex_t print;
@@ -41,6 +42,7 @@ typedef struct s_philo
 	
 	pthread_t thread;
 	
+	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
 	

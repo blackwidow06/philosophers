@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 13:21:28 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 16:44:05 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 11:02:30 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->data->number_of_philo == 1)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_msg(philo, "has taken a fork");
+		usleep(philo->data->time_to_die * 1000);
+		print_msg(philo, "died");
+		philo->data->stop = 1;
+		return (NULL);
+	}
 	while (!philo->data->stop)
 	{
 		ft_eat(philo);
@@ -43,6 +52,7 @@ void	*routine(void *arg)
 void	print_msg(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->print);
-	printf("Philo %d %s\n", philo->id, msg);
+	if (!philo->data->stop)
+		printf("Philo %d %s\n", philo->id, msg);
 	pthread_mutex_unlock(&philo->data->print);
 }

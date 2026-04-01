@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 10:19:58 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 15:01:48 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 16:19:59 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_eat(t_philo *philo)
 {
-	if (philo->id % 2 == 0) /*pairs = droite puis gauche \ impairs = gauche puis droite*/
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_msg(philo, "has taken a fork");
@@ -29,8 +29,11 @@ void	ft_eat(t_philo *philo)
 		print_msg(philo, "has taken a fork");
 	}
 	print_msg(philo, "is eating");
+	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->meal_mutex);
 	usleep(philo->data->time_to_eat * 1000);
+
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }

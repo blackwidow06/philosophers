@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 11:36:00 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/31 17:05:59 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 17:06:31 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 	t_philo		*philo;
 	int			i;
 
+	data.stop = 0;
+	data.start_time = get_time();
 	if (parse_args(&data, argc, argv))
 		return (1);
 	if (init_forks(&data))
@@ -26,6 +28,7 @@ int	main(int argc, char **argv)
 	philo = malloc(sizeof(t_philo) * data.number_of_philo);
 	if (!philo)
 		return (1);
+	data.start_time = get_time();
 	init_philos(philo, &data);
 	if (create_threads(philo, &data))
 		return (1);
