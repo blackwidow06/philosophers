@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:37:16 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/01 16:49:57 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/02 10:30:26 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_time(void)
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec * 1000);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 //void	*monitor(void *arg)
