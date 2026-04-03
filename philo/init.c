@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 11:09:56 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/01 17:06:07 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/03 11:52:44 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ int	init_forks(t_data *data)
 {
 	int	i;
 
+	data->stop = 0;
+	pthread_mutex_init(&data->stop_mutex, NULL);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
 	if (!data->forks)
 		return (1);
 	i = 0;
-	while (i < data->number_of_philo) /*mutex*/
+	while (i < data->number_of_philo)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0) /*active les mutex*/
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 			return (1);
 		i++;
 	}
-	if (pthread_mutex_init(&data->print, NULL) != 0)/*proteger les printf*/
+	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (1);
 	return (0);
 }
@@ -38,7 +40,7 @@ void	init_philos(t_philo *philo, t_data *data)
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		philo[i].id = i + 1;/*numero philo*/
+		philo[i].id = i + 1;
 		philo[i].nbr_meals = 0;
 		philo[i].last_meal = data->start_time;
 		philo[i].data = data;
@@ -48,4 +50,3 @@ void	init_philos(t_philo *philo, t_data *data)
 		i++;
 	}
 }
-

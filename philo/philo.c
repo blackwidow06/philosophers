@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 13:21:28 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/02 10:30:17 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/03 13:32:53 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,18 @@ void	*routine(void *arg)
 		pthread_mutex_lock(philo->left_fork);
 		print_msg(philo, "has taken a fork");
 		usleep(philo->data->time_to_die * 1000);
-		print_msg(philo, "died");
-		philo->data->stop = 1;
+		pthread_mutex_unlock(philo->left_fork);
 		return (NULL);
 	}
-	while (!philo->data->stop)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->data->stop_mutex);
+		if (philo->data->stop)
+		{
+			pthread_mutex_unlock(&philo->data->stop_mutex);
+			break;
+		}
+		pthread_mutex_unlock(&philo->data->stop_mutex);
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
@@ -51,8 +57,14 @@ void	*routine(void *arg)
 
 void	print_msg(t_philo *philo, char *msg)
 {
+	pthread_mutex_lock(&philo->data->stop_mutex);
+	if (philo->data->stop)
+	{
+		pthread_mutex_unlock(&philo->data->stop_mutex);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->data->stop_mutex);
 	pthread_mutex_lock(&philo->data->print);
-	if (!philo->data->stop)
-		printf("Philo %d %s\n", philo->id, msg);
+	printf("%ld %d %s\n", get_time() - philo->data->start_time, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->print);
 }

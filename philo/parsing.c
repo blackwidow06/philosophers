@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/03/18 10:40:04 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/02 13:25:30 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ int	parse_args(t_data *data, int argc, char **argv)
 		return (ft_error());
 	if (check_args(argc, argv))
 		return (ft_error());
-	
 	data->number_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	
 	if (argc == 6)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
-
 	if (data->number_of_philo <= 0
 		|| data->time_to_die <= 0
 		|| data->time_to_eat <= 0

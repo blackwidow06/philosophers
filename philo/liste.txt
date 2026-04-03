@@ -25,3 +25,9 @@ tv.tv_usec = microsecondes (500 000)
 
 monitor = temps actuel - dernier repas (si trop grand mort)
 temps actuel - last_meal > time_to_die
+
+
+erreurs :
+- 6 free / 4 
+- nombre de repas (philo qui meurt) faire fonction ptdrrr
+- le cas 200 800 200 200 (stop tout seul)
