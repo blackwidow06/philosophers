@@ -39,35 +39,43 @@ int	ft_atoi(const char *str)
 	return (nbr);
 }
 
-int	verif_number(char *str)
+void	print_msg(t_philo *philo, char *msg)
 {
-	int	i;
-
-	i = 0;
-	if (!str[i])
-		return (0);
-	while (str[i])
+	pthread_mutex_lock(&philo->data->stop_mutex);
+	if (philo->data->stop)
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
+		pthread_mutex_unlock(&philo->data->stop_mutex);
+		return ;
 	}
-	return (1);
+	pthread_mutex_unlock(&philo->data->stop_mutex);
+	pthread_mutex_lock(&philo->data->print);
+	printf("%ld %d %s\n", get_time() - philo->data->start_time, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->print);
 }
 
-int	check_int(char *str)
+long	get_time(void)
 {
-	long	nbr;
-	int		i;
+	struct timeval	time;
 
-	i = 0;
-	nbr = 0;
-	while (str[i])
-	{
-		nbr = nbr * 10 + (str[i] - '0');
-		if (nbr > INT_MAX)
-			return (0);
-		i++;
-	}
-	return (1);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void free_all(t_data *data, t_philo *philo)
+{
+    int i;
+
+    if (!data || !philo)
+        return;
+    i = 0;
+    while (i < data->number_of_philo)
+        pthread_mutex_destroy(&data->forks[i++]);
+    free(data->forks);
+    i = 0;
+    while (i < data->number_of_philo)
+        pthread_mutex_destroy(&philo[i++].meal_mutex);
+
+    pthread_mutex_destroy(&data->print);
+    pthread_mutex_destroy(&data->stop_mutex);
+    free(philo);
 }

@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/02 13:25:30 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:32:25 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ static int	check_args(int argc, char **argv)
 		i++;
 	}
 	return (0);
-}
-
-static int	ft_error(void)
-{
-	write(2, "Error\n", 6);
-	return (1);
 }
 
 int	parse_args(t_data *data, int argc, char **argv)
@@ -53,4 +47,42 @@ int	parse_args(t_data *data, int argc, char **argv)
 		|| (argc == 6 && data->number_of_meals <= 0))
 		return (ft_error());
 	return (0);
+}
+int	verif_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_int(char *str)
+{
+	long	nbr;
+	int		i;
+
+	i = 0;
+	nbr = 0;
+	while (str[i])
+	{
+		nbr = nbr * 10 + (str[i] - '0');
+		if (nbr > INT_MAX)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	return (1);
 }

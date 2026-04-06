@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 15:13:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/02 14:03:41 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:22:37 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_philo
 {
 	int				id;
 	long			last_meal;
-	int				nbr_meals;
+	int				meals_eaten;
 
 	pthread_t		thread;
 
@@ -50,30 +50,31 @@ typedef struct s_philo
 	t_data			*data;
 }				t_philo;
 
-/*parsing.c*/
-int		parse_args(t_data *data, int argc, char **argv);
-
-/*utils_parsing.c*/
-int		ft_atoi(const char *str);
-int		verif_number(char *str);
-int		check_int(char *str);
-
 /*init.c*/
-int		init_forks(t_data *data);
+int	init_forks(t_data *data);
 void	init_philos(t_philo *philo, t_data *data);
 
-/*philo.c*/
-int		create_threads(t_philo *philo, t_data *data);
-void	*routine(void *arg);
-void	print_msg(t_philo *philo, char *msg);
+/*parsing.c*/
+int	parse_args(t_data *data, int argc, char **argv);
+int	verif_number(char *str);
+int	check_int(char *str);
+int	ft_error(void);
 
-/*routine.c*/
+/*routine*/
+void	*routine(void *arg);
+
+/*action.c*/
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 
-/*monitoring*/
-long	get_time(void);
+/*monitoring.c*/
 void	*monitor(void *arg);
+
+/*utils.c*/
+int	ft_atoi(const char *str);
+void	print_msg(t_philo *philo, char *msg);
+long	get_time(void);
+void	free_all(t_data *data, t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 11:09:56 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/03 11:52:44 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/06 10:08:36 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_philos(t_philo *philo, t_data *data)
 	while (i < data->number_of_philo)
 	{
 		philo[i].id = i + 1;
-		philo[i].nbr_meals = 0;
+		philo[i]. meals_eaten = 0;
 		philo[i].last_meal = data->start_time;
 		philo[i].data = data;
 		philo[i].left_fork = &data->forks[i];

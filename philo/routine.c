@@ -6,53 +6,38 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 10:19:58 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/02 15:07:15 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:48:59 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_eat(t_philo *philo)
+void	*routine(void *arg)
 {
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->right_fork);
-		print_msg(philo, "has taken a fork");
-		pthread_mutex_lock(philo->left_fork);
-		print_msg(philo, "has taken a fork");
-	}
-	else
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if (philo->data->number_of_philo == 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_msg(philo, "has taken a fork");
-		pthread_mutex_lock(philo->right_fork);
-		print_msg(philo, "has taken a fork");
-	}
-	pthread_mutex_lock(&philo->data->stop_mutex);
-	if (philo->data->stop)
-	{
-		pthread_mutex_unlock(&philo->data->stop_mutex);
+		usleep(philo->data->time_to_die * 1000);
 		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
-		return ;
+		return (NULL);
 	}
-	pthread_mutex_unlock(&philo->data->stop_mutex);
-	print_msg(philo, "is eating");
-	pthread_mutex_lock(&philo->meal_mutex);
-	philo->last_meal = get_time();
-	pthread_mutex_unlock(&philo->meal_mutex);
-	usleep(philo->data->time_to_eat * 1000);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	while (1)
+	{
+		pthread_mutex_lock(&philo->data->stop_mutex);
+		if (philo->data->stop)
+		{
+			pthread_mutex_unlock(&philo->data->stop_mutex);
+			break;
+		}
+		pthread_mutex_unlock(&philo->data->stop_mutex);
+		ft_eat(philo);
+		ft_sleep(philo);
+		ft_think(philo);
+	}
+	return (NULL);
 }
 
-void	ft_sleep(t_philo *philo)
-{
-	print_msg(philo, "is sleeping");
-	usleep(philo->data->time_to_sleep * 1000);
-}
-
-void	ft_think(t_philo *philo)
-{
-	print_msg(philo, "is thinking");
-}

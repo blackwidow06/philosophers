@@ -6,11 +6,25 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 11:36:00 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/01 17:06:31 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:32:04 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	create_threads(t_philo *philo, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -35,10 +49,8 @@ int	main(int argc, char **argv)
 	pthread_create(&monitor_thread, NULL, monitor, philo);
 	i = 0;
 	while (i < data.number_of_philo)
-	{
-		pthread_join(philo[i].thread, NULL);
-		i++;
-	}
+		pthread_join(philo[i++].thread, NULL);
 	pthread_join(monitor_thread, NULL);
+	free_all(&data, philo);
 	return (0);
 }

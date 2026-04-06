@@ -6,7 +6,7 @@
 #    By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/02 15:11:05 by malavaud          #+#    #+#              #
-#    Updated: 2026/04/03 11:53:10 by malavaud         ###   ########.fr        #
+#    Updated: 2026/04/06 11:49:16 by malavaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ RM = rm -f
 
 OBJ_DIR = obj
 
-SRCS = philo.c \
+SRCS = action.c \
 	parsing.c \
-	utils_parsing.c \
+	utils.c \
 	init.c \
 	main.c \
 	routine.c \
-	monitoring.c
+	monitoring.c \
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
