@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 11:52:22 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/06 12:32:25 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/07 10:45:35 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	parse_args(t_data *data, int argc, char **argv)
 		return (ft_error());
 	return (0);
 }
+
 int	verif_number(char *str)
 {
 	int	i;

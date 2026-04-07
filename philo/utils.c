@@ -61,21 +61,20 @@ long	get_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void free_all(t_data *data, t_philo *philo)
+void	free_all(t_data *data, t_philo *philo)
 {
-    int i;
+	int	i;
 
-    if (!data || !philo)
-        return;
-    i = 0;
-    while (i < data->number_of_philo)
-        pthread_mutex_destroy(&data->forks[i++]);
-    free(data->forks);
-    i = 0;
-    while (i < data->number_of_philo)
-        pthread_mutex_destroy(&philo[i++].meal_mutex);
-
-    pthread_mutex_destroy(&data->print);
-    pthread_mutex_destroy(&data->stop_mutex);
-    free(philo);
+	if (!data || !philo)
+		return ();
+	i = 0;
+	while (i < data->number_of_philo)
+		pthread_mutex_destroy(&data->forks[i++]);
+	free(data->forks);
+	i = 0;
+	while (i < data->number_of_philo)
+		pthread_mutex_destroy(&philo[i++].meal_mutex);
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->stop_mutex);
+	free(philo);
 }
