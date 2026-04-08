@@ -66,7 +66,7 @@ void	free_all(t_data *data, t_philo *philo)
 	int	i;
 
 	if (!data || !philo)
-		return ();
+		return ;
 	i = 0;
 	while (i < data->number_of_philo)
 		pthread_mutex_destroy(&data->forks[i++]);
